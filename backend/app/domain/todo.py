@@ -1,4 +1,3 @@
-# Todo クラス
 class Todo:
     def __init__(self, title: str):
         if not title:

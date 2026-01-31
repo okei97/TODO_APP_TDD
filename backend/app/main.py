@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from app.interface.schema import CreateTodoRequest
 from app.usecase.create_todo import create_todo
+from app.usecase.list_todos import list_todos
 
 app = FastAPI()
 
@@ -16,3 +17,7 @@ def value_error_exception_handler(request: Request, exc: ValueError):
 def create_todo_api(req: CreateTodoRequest):
     todo = create_todo(req.title)
     return todo
+
+@app.get("/todos")
+def list_todos_api():
+    return list_todos()

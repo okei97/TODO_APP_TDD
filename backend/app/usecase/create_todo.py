@@ -1,4 +1,7 @@
 from app.domain.todo import Todo
+from app.interface.todo_repository import save
 
 def create_todo(title: str) -> Todo:
-    return Todo(title)
+    todo = Todo(title)
+    save(todo)
+    return todo
