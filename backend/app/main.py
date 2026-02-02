@@ -3,8 +3,16 @@ from fastapi.responses import JSONResponse
 from app.interface.schema import CreateTodoRequest
 from app.usecase.create_todo import create_todo
 from app.usecase.list_todos import list_todos
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.exception_handler(ValueError)
 def value_error_exception_handler(request: Request, exc: ValueError):
