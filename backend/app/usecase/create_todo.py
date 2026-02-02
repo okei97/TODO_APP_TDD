@@ -1,5 +1,5 @@
 from app.domain.todo import Todo
-from app.interface.todo_repository import save
+from backend.app.infrastructure.todo_repository import save
 
 def create_todo(title: str) -> Todo:
     todo = Todo(title)
