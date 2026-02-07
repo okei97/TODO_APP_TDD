@@ -7,3 +7,6 @@ def save(todo: Todo) -> None:
 
 def list_all() -> list[Todo]:
     return _todos
+
+def clear_all() -> None:
+    _todos.clear()
