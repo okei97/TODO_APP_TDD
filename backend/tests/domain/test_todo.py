@@ -18,3 +18,8 @@ def test_todo_title_max_length():
     max_length_title = "A" * 100
     todo = Todo(max_length_title)
     assert todo.title == max_length_title
+
+def test_todo_title_exceeds_max_length():
+    too_long_title = "A" * 101
+    with pytest.raises(ValueError):
+        Todo(too_long_title)
