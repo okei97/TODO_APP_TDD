@@ -21,3 +21,13 @@ def test_get_todo_after_post():
     todos = response.json()
     assert len(todos) == 1
     assert todos[0]["title"] == "Test Todo"
+
+def test_get_todo_has_id():
+    client.post("/todos", json={"title": "Todo with ID"})
+
+    response = client.get("/todos")
+    assert response.status_code == 200
+    todos = response.json()
+    assert len(todos) == 1
+    assert "id" in todos[0]
+    assert isinstance(todos[0]["id"], str)

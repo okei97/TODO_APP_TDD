@@ -23,3 +23,12 @@ def test_todo_title_exceeds_max_length():
     too_long_title = "A" * 101
     with pytest.raises(ValueError):
         Todo(too_long_title)
+
+def test_todo_id_auto_generated():
+    todo1 = Todo("test1")
+    todo2 = Todo("test2")
+    assert todo1.id is not None
+    assert todo2.id is not None
+    assert isinstance(todo1.id, str)
+    assert isinstance(todo2.id, str)
+    assert todo1.id != todo2.id
