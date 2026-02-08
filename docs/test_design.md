@@ -34,13 +34,6 @@
 
 実装済み：
 
-- test_create_todo_success：正常な作成
-- test_create_todo_title_one_character：1文字での作成
-- test_create_todo_title_max_length：100文字での作成
-- test_create_todo_empty_title：空文字でのエラー
-- test_create_todo_title_exceeds_max_length：101文字でのエラー
-- test_create_todo_has_id：idが返される
-
 ## API テスト（統合テスト）
 
 ### create_todo API
