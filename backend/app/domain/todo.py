@@ -10,3 +10,13 @@ class Todo:
         self.title = title
         self.id = id or str(uuid.uuid4())
         self.completed = False
+
+    def complete(self):
+        if self.completed:
+            raise ValueError("Todo is already completed")
+        self.completed = True
+    
+    def uncomplete(self):
+        if not self.completed:
+            raise ValueError("Todo is already incomplete")
+        self.completed = False
