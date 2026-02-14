@@ -26,3 +26,23 @@ jobs:
         run: |
           cd backend
           pytest
+
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -H "Content-Type: application/json" -X POST \
+            -d "{\"content\":\"❌ CI failed: ${{ github.repository }} (${{ github.ref_name }})\n${RUN_URL}\"}" \
+            "$DISCORD_WEBHOOK_URL"
+
+      - name: Notify Discord on success
+        if: success()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          curl -H "Content-Type: application/json" -X POST \
+            -d "{\"content\":\"✅ CI success: ${{ github.repository }} (${{ github.ref_name }})\n${RUN_URL}\"}" \
+            "$DISCORD_WEBHOOK_URL"
