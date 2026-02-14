@@ -1,17 +1,42 @@
 const API_BASE = 'http://127.0.0.1:8000';
 
-async function fetchTodos() {
-  const res = await fetch(`${API_BASE}/todos`);
-  const todos = await res.json();
-
+function renderTodos(todos) {
   const list = document.getElementById('todoList');
   list.innerHTML = '';
 
   todos.forEach((todo) => {
     const li = document.createElement('li');
-    li.textContent = `${todo.title} (${todo.completed})`;
+
+    const title = document.createElement('span');
+    title.textContent = todo.title;
+    if (todo.completed) title.style.textDecoration = 'line-through';
+
+    const btn = document.createElement('button');
+    btn.textContent = todo.completed ? '済' : '完了にする';
+    btn.disabled = todo.completed; // 完了済みはボタン無効
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true; // 二重クリック防止
+      try {
+        await completeTodo(todo.id);
+        await fetchTodos(); // 反映
+      } catch (error) {
+        btn.disabled = false; // エラー時は再度クリック可能に
+        alert(`完了に失敗：${error.message}`);
+      }
+    });
+
+    li.appendChild(title);
+    li.appendChild(btn);
     list.appendChild(li);
   });
+}
+
+async function fetchTodos() {
+  const res = await fetch(`${API_BASE}/todos`);
+  const todos = await res.json();
+
+  renderTodos(todos);
 }
 
 async function addTodo() {
@@ -28,6 +53,22 @@ async function addTodo() {
 
   input.value = '';
   fetchTodos();
+}
+
+async function completeTodo(id) {
+  const res = await fetch(`${API_BASE}/todos/${id}/complete`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+
+  return await res.json();
 }
 
 // 初回表示
