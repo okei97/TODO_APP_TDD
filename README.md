@@ -15,7 +15,6 @@
 - レイヤー分離設計を採用
 - 400（ビジネスルール）と422（リクエストバリデーション）を分離
 - Domain / UseCase / API でテストを分離
-- in-memory Repository（将来DB差し替え可能）
 - GitHub Actionsでpytestを自動実行（CI導入）
 
 ## 技術スタック
