@@ -59,7 +59,7 @@ cd backend
 python -m uvicorn app.main:app --reload
 ```
 
-サーバーは http://localhost:8000 で起動します。
+サーバーは http://localhost:8000 で起動します。  
 APIドキュメントは http://localhost:8000/docs で確認できます。
 
 ### テストの実行
