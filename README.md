@@ -1,22 +1,48 @@
-## 概要 個人学習用に作成したシンプルなTodoアプリです。
+# Todo App
+
+## 概要
+
+設計・テスト・レイヤー分離を意識して実装したバックエンド中心のTodoアプリです。
 
 ## 目的
 
-- QA出身の自分が、設計〜実装〜テストの流れを一通り経験するため
-- 小規模でも「変更しやすい構成」を意識するため
+- レイヤー分離設計（Domain / UseCase / Interface / Infrastructure）の実践
+- テスト駆動に近い開発プロセスの検証
+- 変更に強い構造の検討
+
+## 特徴
+
+- レイヤー分離設計を採用
+- 400（ビジネスルール）と422（リクエストバリデーション）を分離
+- Domain / UseCase / API でテストを分離
+- in-memory Repository（将来DB差し替え可能）
+- GitHub Actionsでpytestを自動実行（CI導入）
 
 ## 技術スタック
 
-- Backend: Python (FastAPI)
-- Frontend: JavaScript
-- Test: pytest
+- Python
+- FastAPI
+- Pydantic
+- pytest
 
-## 工夫した点
+## ディレクトリ構成
 
-- ロジックとI/Oを分離し、テストしやすい構成にした
-- バリデーションを実装段階で行い、不具合を防止
-- テストと機能を同時並行で実装した
-- usecaseとdomainでテストが重複しないようにした
+```
+backend/
+├── app/
+│ ├── domain/ # エンティティ・業務ルール
+│ ├── usecase/ # ユースケース
+│ ├── interface/ # FastAPI・スキーマ
+│ └── infrastructure/ # Repository実装
+└── tests/
+    ├── domain/
+    ├── usecase/
+    └── api/
+
+docs/ # 仕様・設計・振り返りドキュメント
+frontend/ # 簡易フロントエンド
+.github/workflows/ # CI設定
+```
 
 ## セットアップと実行
 
@@ -34,6 +60,7 @@ python -m uvicorn app.main:app --reload
 ```
 
 サーバーは http://localhost:8000 で起動します。
+APIドキュメントは http://localhost:8000/docs で確認できます。
 
 ### テストの実行
 
@@ -42,12 +69,23 @@ cd backend
 pytest -v
 ```
 
-## 今後やること
+## 今後の改善予定
 
-- getの返却順序を作成順にする
-- 存在しないidを指定したときにエラーになる
+### 機能面
+
+- 存在しないid指定時の404対応
 - 認証機能追加
-- エラーハンドリングの強化
-- repositoryをin-memory→SQLite→PostgreSQLの流れで変更してみる
-- APIをREST→GraphQLに変更してみる
-- frontend, backendをtypescriptに置き換えてみる
+
+### 設計・技術検証
+
+- Repository実装をin-memoryからSQLite / PostgreSQLへ差し替え検証
+- REST→GraphQLへの変更検証
+- frontend/backendのTypeScript化
+
+## 開発プロセス
+
+本プロジェクトでは、テスト観点を明確にしながら実装を進め、
+実装を通して発見した曖昧さを仕様へ反映するサイクルを意識しました。
+
+詳細な振り返りは以下にまとめています。  
+リンク：[Retrospective](docs/retrospective.md)
