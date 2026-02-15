@@ -4,7 +4,7 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_create_todo_success():
+def test_post_todo_success():
     response = client.post(
         "/todos",
         json={"title": "pytestからのTodo"}
@@ -16,7 +16,7 @@ def test_create_todo_success():
     assert body["title"] == "pytestからのTodo"
     assert body["completed"] is False
 
-def test_create_todo_title_one_character():
+def test_post_todo_title_one_character():
     response = client.post(
         "/todos",
         json={"title": "A"}
@@ -27,7 +27,7 @@ def test_create_todo_title_one_character():
     body = response.json()
     assert body["title"] == "A"
 
-def test_create_todo_title_max_length():
+def test_post_todo_title_max_length():
     max_length_title = "A" * 100
     response = client.post(
         "/todos",
@@ -40,7 +40,7 @@ def test_create_todo_title_max_length():
     assert body["title"] == max_length_title
 
 
-def test_create_todo_without_title():
+def test_post_todo_without_title():
     response = client.post(
         "/todos",
         json={}
@@ -49,7 +49,7 @@ def test_create_todo_without_title():
     assert response.status_code == 422
 
 
-def test_create_todo_empty_title():
+def test_post_todo_empty_title():
     response = client.post(
         "/todos",
         json={"title": ""}
@@ -57,7 +57,7 @@ def test_create_todo_empty_title():
     # 空文字は業務的に意味がないのでドメイン層で弾く。400エラーとなるべき。
     assert response.status_code == 400
 
-def test_create_todo_title_exceeds_max_length():
+def test_post_todo_title_exceeds_max_length():
     too_long_title = "A" * 101
     response = client.post(
         "/todos",
@@ -66,7 +66,7 @@ def test_create_todo_title_exceeds_max_length():
     # タイトルが最大長を超える場合はドメイン層で弾く。400エラーとなるべき。
     assert response.status_code == 400
 
-def test_create_todo_has_id():
+def test_post_todo_has_id():
     response = client.post(
         "/todos",
         json={"title": "Todo with ID"}

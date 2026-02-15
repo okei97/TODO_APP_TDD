@@ -4,7 +4,7 @@ from app.domain.todo import Todo
 
 from app.usecase.complete_todo import complete_todo
 
-def test_complete_todo():
+def test_complete_todo_success():
     clear_all()
     todo = Todo("test")
     save(todo)

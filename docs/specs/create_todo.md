@@ -1,0 +1,65 @@
+# Todo作成（create_todo）
+
+## 概要
+
+Todoを作成して返す。
+
+- 対象ユースケース：create_todo
+- 対象API：POST /todos
+
+## リクエスト
+
+### Body(JSON)
+
+- title: string（必須）
+
+#### 制約
+
+- 1〜100文字
+- 空文字は不可
+
+## レスポンス
+
+### 成功（200）※201にするべき？
+
+Todoを返す。
+
+- id: string（UUID形式の自動生成値）
+- title: string
+- completed: boolean（初期値 false）
+
+例：
+
+```json
+{
+  "id": "xxxx",
+  "title": "test",
+  "completed": false
+}
+```
+
+### エラー
+
+### 422（Request Validation）
+
+- titleが省略された場合(Pydanticのバリデーション)
+
+### 400（Business Rule / Domain）
+
+- titleが空文字の場合
+- titleが101文字以上の場合
+
+## テスト観点
+
+### 正常系
+
+- titleが1文字でも作成できること
+- titleが100文字でも作成できること
+- completedの初期値はfalseこと
+- idが自動生成されること
+
+### 異常系
+
+- titleが空文字の場合400エラーになること
+- titleが101文字以上の場合400エラーになること
+- titleが省略されている場合422エラーになること

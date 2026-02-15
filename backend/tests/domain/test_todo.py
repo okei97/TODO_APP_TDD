@@ -33,12 +33,12 @@ def test_todo_id_auto_generated():
     assert isinstance(todo2.id, str)
     assert todo1.id != todo2.id
 
-def test_complete_todo():
+def test_todo_completed_sets_true():
     todo = Todo("test")
     todo.complete()
     assert todo.completed is True
 
-def test_complete_todo_already_completed():
+def test_todo_complete_when_already_completed_raises_error():
     todo = Todo("test")
     todo.complete()
     with pytest.raises(ValueError):

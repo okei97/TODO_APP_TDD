@@ -8,14 +8,14 @@
 ## 技術スタック
 
 - Backend: Python (FastAPI)
-- Frontend: TypeScript
-- Test: pytest（簡単な自動テスト）
+- Frontend: JavaScript
+- Test: pytest
 
 ## 工夫した点
 
 - ロジックとI/Oを分離し、テストしやすい構成にした
 - バリデーションを実装段階で行い、不具合を防止
-- テストケースを先に考えてから実装した
+- テストと機能を同時並行で実装した
 - usecaseとdomainでテストが重複しないようにした
 
 ## セットアップと実行
@@ -34,17 +34,20 @@ python -m uvicorn app.main:app --reload
 ```
 
 サーバーは http://localhost:8000 で起動します。
-API ドキュメントは http://localhost:8000/docs で確認できます。
 
 ### テストの実行
 
 ```bash
 cd backend
-pytest
+pytest -v
 ```
 
-## 今後の改善点
+## 今後やること
 
+- getの返却順序を作成順にする
+- 存在しないidを指定したときにエラーになる
 - 認証機能追加
 - エラーハンドリングの強化
-- CIへのテスト組み込み
+- repositoryをin-memory→SQLite→PostgreSQLの流れで変更してみる
+- APIをREST→GraphQLに変更してみる
+- frontend, backendをtypescriptに置き換えてみる
