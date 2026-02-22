@@ -28,6 +28,15 @@ function renderTodos(todos) {
 
     li.appendChild(title);
     li.appendChild(btn);
+    // 完了日付の表示（ボタンの右側）
+    if (todo.completed && todo.completed_at) {
+      const completedAt = document.createElement('span');
+      completedAt.style.marginLeft = '8px';
+      // ISO8601文字列を日本語日付に変換
+      const date = new Date(todo.completed_at);
+      completedAt.textContent = `完了日時: ${date.toLocaleString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}`;
+      li.appendChild(completedAt);
+    }
     list.appendChild(li);
   });
 }
