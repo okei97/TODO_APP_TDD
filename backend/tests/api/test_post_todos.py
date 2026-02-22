@@ -15,6 +15,7 @@ def test_post_todo_success():
     body = response.json()
     assert body["title"] == "pytestからのTodo"
     assert body["completed"] is False
+    assert body["completed_at"] is None
 
 def test_post_todo_title_one_character():
     response = client.post(

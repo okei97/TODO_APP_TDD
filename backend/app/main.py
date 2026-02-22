@@ -5,6 +5,7 @@ from app.usecase.create_todo import create_todo
 from app.usecase.list_todos import list_todos
 from app.usecase.complete_todo import complete_todo
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
 
 app = FastAPI()
 
@@ -33,5 +34,6 @@ def list_todos_api():
 
 @app.patch("/todos/{todo_id}/complete")
 def complete_todo_api(todo_id: str):
-    todo = complete_todo(todo_id)
+    now = datetime.now()
+    todo = complete_todo(todo_id, now)
     return todo
