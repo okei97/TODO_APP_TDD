@@ -9,7 +9,7 @@
 
 ## リクエスト
 
-### Body(JSON)
+### Body(JSON) ※GETだからいらない消す
 
 - なし
 
@@ -23,6 +23,7 @@ Todoの配列を返す。
   - id: string
   - title: string
   - completed: boolean
+  - completed_at: string | null（未完了はnull、完了時はISO8601文字列）
 - 返却順序は保証しない
 
 例：
@@ -32,12 +33,14 @@ Todoの配列を返す。
   {
     "id": "xxxx",
     "title": "test1",
-    "completed": false
+    "completed": false,
+    "completed_at": null
   },
   {
     "id": "yyyy",
     "title": "test2",
-    "completed": false
+    "completed": true,
+    "completed_at": "2026-02-22T15:30:00+09:00"
   }
 ]
 ```

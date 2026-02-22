@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from app.main import app
 from app.infrastructure.todo_repository import clear_all
+from datetime import datetime
 
 client = TestClient(app)
 
@@ -13,10 +14,14 @@ def test_patch_complete_success():
     todo = post_response.json()
     todo_id = todo["id"]
 
+    t0 = datetime.now()
     complete_response = client.patch(f"/todos/{todo_id}/complete")
+    t1 = datetime.now()
     assert complete_response.status_code == 200
     completed_todo = complete_response.json()
     assert completed_todo["completed"] is True
+    completed_at = datetime.fromisoformat(completed_todo["completed_at"])
+    assert t0 <= completed_at <= t1
 
     list_response = client.get("/todos")
     todos = list_response.json()

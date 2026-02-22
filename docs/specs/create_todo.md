@@ -27,6 +27,7 @@ Todoを返す。
 - id: string（UUID形式の自動生成値）
 - title: string
 - completed: boolean（初期値 false）
+- completed_at: string | null（未完了はnull、完了時はISO8601文字列）
 
 例：
 
@@ -34,7 +35,8 @@ Todoを返す。
 {
   "id": "xxxx",
   "title": "test",
-  "completed": false
+  "completed": false,
+  "completed_at": null
 }
 ```
 
@@ -57,6 +59,7 @@ Todoを返す。
 - titleが100文字でも作成できること
 - completedの初期値はfalseこと
 - idが自動生成されること
+- completed_atの初期値はnullであること
 
 ### 異常系
 
