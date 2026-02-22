@@ -20,6 +20,8 @@ Todoを完了して返す。
 - completedをtrueにして返す。
   - 未完了(false) -> 完了(true)
 - すでにcompleted=trueのTodoの場合エラーを返す。
+- completed_atに現在時刻(ISO8601文字列)を入れて返す。
+- 現在時刻はusecase層で取得する。
 
 例：
 
@@ -27,7 +29,8 @@ Todoを完了して返す。
 {
   "id": "xxxx",
   "title": "test",
-  "completed": true
+  "completed": true,
+  "completed_at": "2026-02-22T15:30:00+09:00"
 }
 ```
 
@@ -42,7 +45,9 @@ Todoを完了して返す。
 ### 正常系
 
 - completedがtrueになること
+- completed_atに現在時刻(ISO8601文字列)が入ること
 
 ### 異常系
 
-- PATCHを2回実行すると2回目は400になること
+- PATCHを2回実行すると2回目は400になること  
+  ※todo_idが存在しない場合についての観点が抜けてる
