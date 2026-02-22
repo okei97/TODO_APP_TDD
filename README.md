@@ -85,6 +85,8 @@ pytest -v
 
 本プロジェクトでは、テスト観点を明確にしながら実装を進め、
 実装を通して発見した曖昧さを仕様へ反映するサイクルを意識しました。
-
-詳細な振り返りは以下にまとめています。  
-リンク：[Retrospective](docs/99_retrospective.md)
+詳細は以下を参照。
+開発プロセス
+[Development Process](docs/97_development-process.md)
+振り返り
+[Retrospective](docs/99_retrospective.md)
