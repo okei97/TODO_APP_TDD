@@ -20,8 +20,7 @@ Todoを完了して返す。
 - completedをtrueにして返す。
   - 未完了(false) -> 完了(true)
 - すでにcompleted=trueのTodoの場合エラーを返す。
-- completed_atに現在時刻(ISO8601文字列)を入れて返す。
-- 現在時刻はusecase層で取得する。
+- completed_atには、完了操作が実行された時刻を設定する。（ISO8601形式）
 
 例：
 

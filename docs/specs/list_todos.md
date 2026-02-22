@@ -51,5 +51,3 @@ Todoの配列を返す。
 
 - 保存済みのTodoがすべて返却されること
 - todoが0件の時、空のリストを受け取ること
-- 各Todoが completed_at: string | null を満たすこと（未完了はnull、完了済みはstring）  
-  ※id, title, completedについてもテストを追加する？共通アサーション関数とするといいかも
