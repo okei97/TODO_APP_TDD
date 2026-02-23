@@ -23,7 +23,7 @@ def value_error_exception_handler(request: Request, exc: ValueError):
         content={"detail": str(exc)},
     )
 
-@app.post("/todos")
+@app.post("/todos", status_code=201)
 def create_todo_api(req: CreateTodoRequest):
     todo = create_todo(req.title)
     return todo
