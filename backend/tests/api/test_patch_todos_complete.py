@@ -1,12 +1,8 @@
 from fastapi.testclient import TestClient
 from app.main import app
-from app.infrastructure.todo_repository import clear_all
 from datetime import datetime
 
 client = TestClient(app)
-
-def setup_function():
-    clear_all()
 
 def test_patch_complete_success():
     post_response = client.post("/todos", json={"title": "Incomplete Todo"})

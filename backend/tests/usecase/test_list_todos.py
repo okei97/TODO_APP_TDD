@@ -1,11 +1,10 @@
 import pytest
-from app.infrastructure.todo_repository import clear_all, save
+from app.infrastructure.todo_repository import save
 from app.domain.todo import Todo
 
 from app.usecase.list_todos import list_todos
 
 def test_list_todos_returns_saved_todos():
-    clear_all()
     todo = Todo("test_id", "test")
     save(todo)
 
