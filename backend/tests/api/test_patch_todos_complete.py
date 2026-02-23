@@ -10,7 +10,7 @@ def setup_function():
 
 def test_patch_complete_success():
     post_response = client.post("/todos", json={"title": "Incomplete Todo"})
-    assert post_response.status_code == 200
+    assert post_response.status_code == 201
     todo = post_response.json()
     todo_id = todo["id"]
 
@@ -30,7 +30,7 @@ def test_patch_complete_success():
 
 def test_patch_complete_when_already_completed():
     post_response = client.post("/todos", json={"title": "Already Completed Todo"})
-    assert post_response.status_code == 200
+    assert post_response.status_code == 201
     todo = post_response.json()
     todo_id = todo["id"]
 
