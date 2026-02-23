@@ -10,7 +10,7 @@ def test_post_todo_success():
         json={"title": "pytestからのTodo"}
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     body = response.json()
     assert body["title"] == "pytestからのTodo"
@@ -23,7 +23,7 @@ def test_post_todo_title_one_character():
         json={"title": "A"}
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     body = response.json()
     assert body["title"] == "A"
@@ -35,7 +35,7 @@ def test_post_todo_title_max_length():
         json={"title": max_length_title}
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     body = response.json()
     assert body["title"] == max_length_title
@@ -73,7 +73,7 @@ def test_post_todo_has_id():
         json={"title": "Todo with ID"}
     )
 
-    assert response.status_code == 200
+    assert response.status_code == 201
 
     body = response.json()
     assert "id" in body
