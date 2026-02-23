@@ -26,19 +26,17 @@ def test_todo_title_exceeds_max_length():
     with pytest.raises(ValueError):
         Todo("test_id", too_long_title)
 
-def test_todo_completed_sets_true():
+def test_todo_completed_sets_true(fixed_now):
     todo = Todo("test_id", "test")
-    now = datetime(2026, 2, 22, 15, 30)
-    todo.complete(now)
+    todo.complete(fixed_now)
     assert todo.completed is True
-    assert todo.completed_at == now
+    assert todo.completed_at == fixed_now
 
-def test_todo_complete_when_already_completed_raises_error():
+def test_todo_complete_when_already_completed_raises_error(fixed_now):
     todo = Todo("test_id", "test")
-    now = datetime(2026, 2, 22, 15, 30)
-    todo.complete(now)
+    todo.complete(fixed_now)
     with pytest.raises(ValueError):
-        todo.complete(now)
+        todo.complete(fixed_now)
 
 def test_todo_completed_at():
     todo = Todo("test_id", "test")

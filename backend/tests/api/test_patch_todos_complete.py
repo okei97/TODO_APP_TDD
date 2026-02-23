@@ -1,12 +1,8 @@
 from fastapi.testclient import TestClient
 from app.main import app
-from app.infrastructure.todo_repository import clear_all
 from datetime import datetime
 
 client = TestClient(app)
-
-def setup_function():
-    clear_all()
 
 def test_patch_complete_success():
     post_response = client.post("/todos", json={"title": "Incomplete Todo"})
@@ -39,3 +35,7 @@ def test_patch_complete_when_already_completed():
 
     complete_response2 = client.patch(f"/todos/{todo_id}/complete")
     assert complete_response2.status_code == 400
+
+def test_patch_complete_unexisting_id():
+    response = client.patch("/todos/nonexistent_id/complete")
+    assert response.status_code == 400 #存在しないIDに対しては404エラーとなるべきだが、現在の実装では400エラーとなっている。（要改修）

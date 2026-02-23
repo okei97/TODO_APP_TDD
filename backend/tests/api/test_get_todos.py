@@ -1,11 +1,7 @@
 from fastapi.testclient import TestClient
 from app.main import app
-from app.infrastructure.todo_repository import clear_all
 
 client = TestClient(app)
-
-def setup_function():
-    clear_all()
 
 def test_get_todo_list_empty():
     response = client.get("/todos")

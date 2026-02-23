@@ -1,10 +1,9 @@
 import pytest
-from app.infrastructure.todo_repository import clear_all, get
+from app.infrastructure.todo_repository import get
 
 from app.usecase.create_todo import create_todo
 
 def test_create_todo_saves_todo ():
-    clear_all()
     todo = create_todo("test")
 
     saved_todo = get(todo.id)
@@ -12,7 +11,6 @@ def test_create_todo_saves_todo ():
     assert saved_todo.title == "test"
 
 def test_todo_id_auto_generated():
-    clear_all()
     todo1 = create_todo("test1")
     todo2 = create_todo("test2")
 
