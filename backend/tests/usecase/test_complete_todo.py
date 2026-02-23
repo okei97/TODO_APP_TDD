@@ -7,7 +7,7 @@ from app.usecase.complete_todo import complete_todo
 
 def test_complete_todo_success():
     clear_all()
-    todo = Todo("test")
+    todo = Todo("test_id", "test")
     save(todo)
 
     fixed_now = datetime(2026, 2, 22, 15, 30)

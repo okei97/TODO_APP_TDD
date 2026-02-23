@@ -6,7 +6,7 @@ from app.usecase.list_todos import list_todos
 
 def test_list_todos_returns_saved_todos():
     clear_all()
-    todo = Todo("test")
+    todo = Todo("test_id", "test")
     save(todo)
 
     todos = list_todos()
