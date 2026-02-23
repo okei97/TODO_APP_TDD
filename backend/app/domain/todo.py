@@ -17,9 +17,3 @@ class Todo:
             raise ValueError("Todo is already completed")
         self.completed = True
         self.completed_at = now
-    
-    # 実装しないコメントアウトする
-    def uncomplete(self):
-        if not self.completed:
-            raise ValueError("Todo is already incomplete")
-        self.completed = False
