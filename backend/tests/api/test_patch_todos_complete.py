@@ -39,3 +39,7 @@ def test_patch_complete_when_already_completed():
 
     complete_response2 = client.patch(f"/todos/{todo_id}/complete")
     assert complete_response2.status_code == 400
+
+def test_patch_complete_unexisting_id():
+    response = client.patch("/todos/nonexistent_id/complete")
+    assert response.status_code == 400 #存在しないIDに対しては404エラーとなるべきだが、現在の実装では400エラーとなっている。（要改修）

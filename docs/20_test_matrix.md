@@ -24,9 +24,9 @@
 
 # PATCH /todos/{id}/complete
 
-| 仕様                              | domain                                                 | usecase                    | api                                        |
-| --------------------------------- | ------------------------------------------------------ | -------------------------- | ------------------------------------------ |
-| completedがtrueになる             | test_todo_completed_sets_true                          | test_complete_todo_success | test_patch_complete_success                |
-| completedがtrueの時trueにできない | test_todo_complete_when_already_completed_raises_error | -                          | test_patch_complete_when_already_completed |
-| 存在しないid                      | -                                                      | -                          | -                                          |
-| completed_atに現在時刻が入ること  | -                                                      | test_complete_todo_succes  | -                                          |
+| 仕様                              | domain                                                 | usecase                          | api                                        |
+| --------------------------------- | ------------------------------------------------------ | -------------------------------- | ------------------------------------------ |
+| completedがtrueになる             | test_todo_completed_sets_true                          | test_complete_todo_success       | test_patch_complete_success                |
+| completedがtrueの時trueにできない | test_todo_complete_when_already_completed_raises_error | -                                | test_patch_complete_when_already_completed |
+| 存在しないid                      | -                                                      | test_complete_todo_unexisting_id | test_patch_complete_unexisting_id          |
+| completed_atに現在時刻が入ること  | -                                                      | test_complete_todo_succes        | -                                          |

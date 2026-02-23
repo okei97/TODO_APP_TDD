@@ -14,3 +14,8 @@ def test_complete_todo_success():
     completed_todo = complete_todo(todo.id, fixed_now)
     assert completed_todo.completed is True
     assert completed_todo.completed_at == fixed_now
+
+def test_complete_todo_unexisting_id():
+    clear_all()
+    with pytest.raises(ValueError):
+        complete_todo("nonexistent_id", datetime(2026, 2, 22, 15, 30))
