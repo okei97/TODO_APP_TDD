@@ -26,7 +26,9 @@
 
 ## 6. CI確認
 
-- すべてのテストが成功することを確認
+- GitHub Actions により自動テストを実行
+- pytest / pytest-cov でカバレッジを確認
+- カバレッジが95%を下回る場合はCIを失敗とする。
 
 ## 7. Pull Request → Merge
 
