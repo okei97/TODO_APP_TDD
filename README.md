@@ -23,6 +23,8 @@
 - FastAPI
 - Pydantic
 - pytest
+- JavaScript
+- Playwright
 
 ## ディレクトリ構成
 
@@ -51,7 +53,12 @@ frontend/ # 簡易フロントエンド
 pip install fastapi uvicorn pytest
 ```
 
-### サーバーの起動
+```bash
+cd frontend
+npm install
+```
+
+### backendの実行方法
 
 ```bash
 cd backend
@@ -61,11 +68,30 @@ python -m uvicorn app.main:app --reload
 サーバーは http://localhost:8000 で起動します。  
 APIドキュメントは http://localhost:8000/docs で確認できます。
 
-### テストの実行
+### frontendの表示方法
+
+frontend ディレクトリで簡易Webサーバーを起動します。
+
+```bash
+cd frontend
+python -m http.server 3000
+```
+
+ブラウザで以下にアクセスすると画面を確認できます。
+http://127.0.0.1:3000
+
+### backendテストの実行
 
 ```bash
 cd backend
 pytest -v
+```
+
+### frontendテストの実行
+
+```bash
+cd frontend
+npx playwright test
 ```
 
 ## 今後の改善予定
@@ -85,7 +111,7 @@ pytest -v
 
 本プロジェクトでは、テスト観点を明確にしながら実装を進め、
 実装を通して発見した曖昧さを仕様へ反映するサイクルを意識しました。
-詳細は以下を参照。
+詳細は以下を参照してください。
 開発プロセス
 [Development Process](docs/97_development-process.md)
 振り返り
